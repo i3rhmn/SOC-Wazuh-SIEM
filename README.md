@@ -387,17 +387,6 @@ Abdulrahman Altairey
 
 Cybersecurity Student
 Bahrain Polytechnic
-
-LinkedIn
-GitHub
-
-
-### One important thing
-
-I would **keep this level of detail for GitHub**, but I would **not make it much longer than this**. Your README now tells a recruiter exactly what matters:
-
-**Architecture → Wazuh → Detection → Investigation → CTI → Automated Response → SOAR → Your Contribution**
-
 And importantly, your personal contribution is clearly separated from the group's work, which is useful because the original report shows that your assigned work was specifically **XDR Detection & Automated Response + Shuffle SOAR**. :contentReference[oaicite:7]{index=7}
 
 Also, I deliberately l
