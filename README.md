@@ -1,207 +1,150 @@
-# SOC Monitoring & Wazuh SIEM Project
+🛡️ SOC Monitoring & Wazuh SIEM Project
+=======================================
 
-## Overview
+A practical **Security Operations Center (SOC)** project developed for the **IT8510 – Threat Intelligence and Threat Hunting** course.
 
-A practical Security Operations Center (SOC) project developed as part of the IT8510 Threat Intelligence and Threat Hunting course.
+The project demonstrates the design and implementation of a controlled SOC environment using **Wazuh SIEM** as the central security monitoring and detection platform, integrated with **Threat Intelligence, XDR, IDS, and SOAR automation**.
 
-The project focused on designing and implementing a functional SOC environment using **Wazuh SIEM** as the central security monitoring and detection platform. The environment was extended with threat intelligence, XDR-based detection and response, IDS monitoring, and SOAR automation.
+**Security Monitoring Lifecycle**
 
-The project demonstrates the complete security monitoring lifecycle:
+Data Collection → Detection → Analysis → Response → Continuous Monitoring
 
-`Data Collection → Detection → Analysis → Response → Continuous Monitoring`
+🎯 Project Objectives
+---------------------
 
-The implementation was performed in a controlled virtual lab environment using Windows and Linux systems.
+*   Design and implement a functional SOC architecture
+    
+*   Deploy and configure **Wazuh SIEM**
+    
+*   Monitor Windows and Linux endpoints
+    
+*   Collect and analyze security events
+    
+*   Create and validate custom detection rules
+    
+*   Perform controlled threat detection scenarios
+    
+*   Integrate Cyber Threat Intelligence (CTI)
+    
+*   Implement automated response mechanisms
+    
+*   Integrate **Wazuh with Shuffle SOAR**
+    
+*   Validate detection and response using security evidence
+    
 
----
-
-## Project Objectives
-
-- Design a functional SOC architecture.
-- Deploy and configure Wazuh as a centralized SIEM platform.
-- Collect and analyze security events from multiple systems.
-- Monitor Windows and Linux endpoints.
-- Detect and investigate simulated security threats.
-- Configure custom detection rules.
-- Implement automated security response actions.
-- Integrate external Cyber Threat Intelligence (CTI) sources.
-- Implement SOAR automation using Shuffle.
-- Validate detection and response through logs, alerts, and system evidence.
-
----
-
-## SOC Architecture
-
-The SOC architecture was designed around multiple security components covering different stages of the security operations lifecycle.
+🏗️ SOC Architecture
+--------------------
 
 ### Core Components
 
-- **SIEM:** Wazuh
-- **Threat Intelligence:** VirusTotal, AbuseIPDB, AlienVault OTX
-- **Log Management:** Centralized collection and analysis of security logs
-- **Endpoint Monitoring:** Wazuh agents
-- **IDS/IPS:** Snort
-- **File Integrity Monitoring:** Wazuh FIM
-- **XDR:** Detection and automated response
-- **SOAR:** Shuffle
-- **Vulnerability Management:** Security assessment and remediation support
+ComponentPurpose**Wazuh SIEM**Centralized monitoring, detection, alerting, and investigation**Wazuh Agents**Endpoint monitoring and log collection**Snort IDS**Network intrusion detection**Sysmon**Windows process and system activity monitoring**VirusTotal**File and hash threat intelligence**AbuseIPDB**IP reputation intelligence**AlienVault OTX**IOC and threat intelligence investigation**Shuffle SOAR**Security automation and alert notification**Kali Linux**Controlled security testing**Virtual Machines**Isolated security laboratory
 
-The architecture follows a continuous workflow:
+The architecture follows a continuous security operations workflow:
 
-`Data Collection → Detection → Analysis → Response → Continuous Monitoring`
+Collect → Detect → Investigate → Respond → Monitor
 
----
+🖥️ Lab Environment
+-------------------
 
-## Lab Environment
+The project was implemented in an isolated virtual laboratory using:
 
-The project was implemented using a virtualized security environment consisting of:
+*   **Windows Server 2022**
+    
+*   **Bodhi Linux**
+    
+*   **Kali Linux**
+    
+*   **Wazuh SIEM**
+    
+*   **Snort IDS**
+    
+*   **Sysmon**
+    
+*   **Shuffle SOAR**
+    
+*   **Virtual Machines**
+    
 
-| System / Tool | Purpose |
-|---|---|
-| **Wazuh SIEM** | Centralized security monitoring, alerting, and investigation |
-| **Windows Server 2022** | Windows endpoint and security event source |
-| **Bodhi Linux** | Linux endpoint and SSH monitoring |
-| **Snort IDS** | Network intrusion detection |
-| **Kali Linux** | Controlled security testing and event generation |
-| **Shuffle SOAR** | Security alert automation and notification |
-| **Virtual Machines** | Isolated laboratory environment |
+Wazuh served as the central platform for collecting, correlating, and analyzing security events.
 
-Wazuh was deployed as the central platform for collecting, correlating, and analyzing security events from the monitored infrastructure.
+🔍 XDR Detection & Automated Response
+-------------------------------------
 
----
+Three controlled security scenarios were implemented to demonstrate detection and automated response.
 
-## Wazuh SIEM Implementation
+### 1\. SMB Brute-Force Detection
 
-Wazuh was deployed as the main SIEM platform and configured to provide centralized security monitoring.
+**Detection**
 
-The implementation included:
+*   Windows Security Logs
+    
+*   Event ID **4625**
+    
+*   Custom Wazuh detection rule
+    
 
-- Wazuh Manager
-- Wazuh Indexer
-- Wazuh Dashboard
-- Wazuh agents
-- Windows Server monitoring
-- Linux endpoint monitoring
-- Snort IDS integration
-- File Integrity Monitoring (FIM)
-- Custom detection rules
-- Active response mechanisms
+**Response**
 
-Security events were collected from monitored systems and presented through the Wazuh dashboard for investigation and response.
+*   Windows Firewall blocking of the identified source
+    
 
----
+The response was validated through controlled testing.
 
-## XDR Detection & Automated Response
+### 2\. Malware Detection – EICAR
 
-The project included three controlled threat scenarios to demonstrate detection and automated response capabilities through Wazuh.
+The **EICAR test file** was used as a safe malware-detection test case.
 
-### 1. SMB Brute-Force Detection
+**Detection Chain**
 
-A controlled SMB authentication attack was generated against the Windows Server environment.
+File Creation → FIM Detection → VirusTotal Analysis → Wazuh Alert → Automated Response
 
-Wazuh was configured with a custom detection rule to identify repeated failed authentication attempts.
+The test file was automatically removed after detection.
 
-**Detection:**
+### 3\. Suspicious PowerShell Activity
 
-- Windows Security logs
-- Event ID 4625
-- Custom Wazuh detection rule
+Suspicious PowerShell activity was generated in the controlled environment and monitored using **Sysmon and Wazuh**.
 
-**Response:**
+**Detection**
 
-- Windows Firewall blocking of the identified source
+*   Sysmon process creation events
+    
+*   Custom Wazuh rule
+    
+*   Wazuh Dashboard
+    
 
-**Validation:**
+**Response**
 
-The response was tested to confirm that the suspicious traffic was successfully blocked.
+*   Windows Firewall outbound restriction
+    
 
----
+Network connectivity was then tested to validate the response.
 
-### 2. Malware Detection & Automated Response
+🌐 Threat Intelligence Integration
+----------------------------------
 
-The **EICAR test file** was used as a safe test case for malware detection.
+The SOC environment incorporated multiple external CTI sources:
 
-Wazuh File Integrity Monitoring detected the new file and triggered VirusTotal-based analysis.
+*   **VirusTotal** – File and hash analysis
+    
+*   **AbuseIPDB** – IP reputation and malicious IP intelligence
+    
+*   **AlienVault OTX** – Investigation of IPs, domains, hashes, and IOCs
+    
 
-The detection chain included:
+**Threat Intelligence Workflow**
 
-`File Creation → FIM Detection → VirusTotal Analysis → Wazuh Alert → Automated Response`
+Indicator → Intelligence Lookup → Threat Verdict → Security Investigation
 
-The malicious test file was automatically removed from the monitored endpoint after detection.
+⚙️ SOAR Automation with Shuffle
+-------------------------------
 
-This demonstrated the integration of:
+Wazuh was integrated with **Shuffle SOAR** to automate security alert processing and notification.
 
-- File Integrity Monitoring
-- VirusTotal
-- Wazuh alerting
-- Active response
+The demonstrated scenario involved **SSH brute-force detection** on the Bodhi Linux system.
 
----
-
-### 3. Suspicious PowerShell Activity
-
-Suspicious PowerShell activity was generated in the controlled environment and monitored using **Sysmon** and Wazuh.
-
-Sysmon recorded the process creation event, while a custom Wazuh rule was used to identify the suspicious activity.
-
-**Detection:**
-
-- Sysmon
-- Process creation events
-- Custom Wazuh rule
-- Wazuh Dashboard
-
-**Response:**
-
-A Windows Firewall outbound rule was configured to restrict network communication from PowerShell.
-
-The response was subsequently validated through network connectivity testing.
-
----
-
-## Threat Intelligence Integration
-
-External Cyber Threat Intelligence sources were integrated into the SOC environment to enrich security alerts and improve investigation.
-
-### VirusTotal
-
-VirusTotal was integrated with Wazuh to analyze file hashes associated with monitored files.
-
-The workflow included:
-
-`File Detection → Hash Extraction → VirusTotal Analysis → Threat Verdict → Wazuh Alert`
-
-This allowed suspicious files to be enriched with external threat intelligence information.
-
-### AbuseIPDB
-
-AbuseIPDB was evaluated and integrated as an external source for IP reputation and malicious IP intelligence.
-
-This information can support the investigation of suspicious network activity and source addresses.
-
-### AlienVault OTX
-
-AlienVault Open Threat Exchange (OTX) was used as another threat intelligence source for investigating indicators such as:
-
-- IP addresses
-- Domains
-- File hashes
-- Indicators of Compromise (IOCs)
-
-The three CTI sources used in the project were:
-
-`VirusTotal + AbuseIPDB + AlienVault OTX`
-
----
-
-## SOAR Automation with Shuffle
-
-The project implemented a SOAR workflow by integrating **Wazuh with Shuffle**.
-
-The selected scenario involved SSH brute-force detection on the Bodhi Linux system.
-
-### Workflow
-
-```text
+```
 Security Event
       ↓
 Wazuh Detection
@@ -214,179 +157,212 @@ Alert Processing
       ↓
 Automated Email Notification
       ↓
-SOC Analyst
+SOC Analyst   
+```
+The workflow was tested successfully, including alert processing and email notification.
 
-A custom Wazuh rule was configured to detect repeated SSH authentication failures.
+📊 Detection & Response
+-----------------------
 
-When the alert was generated, Wazuh forwarded the alert information to Shuffle through a webhook.
+Security ScenarioDetectionResponse**SMB Brute Force**Wazuh + Windows LogsWindows Firewall Blocking**EICAR Test File**Wazuh FIM + VirusTotalAutomated File Removal**Suspicious PowerShell**Sysmon + WazuhFirewall Outbound Blocking**SSH Brute Force**Wazuh Custom RuleShuffle Notification
 
-Shuffle then processed the alert and automatically sent an email notification containing the security alert details.
+🔎 Threat Hunting & Investigation
+---------------------------------
 
-The workflow was successfully executed and the notification was received as expected.
+The project also involved practical security investigation activities:
 
-Detection & Response Summary
-Security Scenario	Detection	Response
-SMB Brute Force	Wazuh + Windows Event Logs	Windows Firewall blocking
-Malware / EICAR	Wazuh FIM + VirusTotal	Automated file removal
-Suspicious PowerShell	Sysmon + Wazuh	Firewall outbound blocking
-SSH Brute Force	Wazuh custom rule	Shuffle automated notification
+*   Security alert analysis
+    
+*   Windows and Linux log analysis
+    
+*   Authentication failure investigation
+    
+*   Process creation analysis
+    
+*   Suspicious file investigation
+    
+*   IOC analysis
+    
+*   Event correlation
+    
+*   Detection-rule validation
+    
+*   Response verification
+    
 
-The three XDR scenarios were successfully detected, responded to, and validated using security logs and system evidence.
+The objective was to understand the activity behind security alerts rather than simply generate alerts.
 
-Threat Hunting & Security Investigation
+🧰 Technologies & Tools
+-----------------------
 
-The project also focused on threat hunting and security event investigation.
+**SOC / SIEM**
 
-Activities included:
+*   Wazuh SIEM
+    
+*   Wazuh Dashboard
+    
+*   Wazuh Agents
+    
+*   SIEM Monitoring
+    
+*   Log Analysis
+    
 
-Reviewing security alerts
-Analyzing Windows and Linux logs
-Investigating authentication failures
-Reviewing process creation events
-Investigating suspicious files
-Analyzing indicators of compromise
-Correlating security events
-Validating detection rules
-Verifying response actions
+**Security Monitoring**
 
-The goal was to move from simple alert generation toward understanding the activity behind each security event.
+*   Windows Server 2022
+    
+*   Bodhi Linux
+    
+*   Sysmon
+    
+*   Snort IDS
+    
+*   File Integrity Monitoring
+    
 
-Technologies & Tools
-SIEM & SOC
-Wazuh SIEM
-Wazuh Dashboard
-Wazuh Agents
-SIEM Monitoring
-Log Analysis
-Security Monitoring
-Windows Server 2022
-Bodhi Linux
-Sysmon
-Snort IDS
-File Integrity Monitoring
-Threat Intelligence
-VirusTotal
-AbuseIPDB
-AlienVault OTX
-Cyber Threat Intelligence (CTI)
-Indicators of Compromise (IOCs)
-Automation
-Shuffle SOAR
-Webhooks
-Automated Email Notifications
-Wazuh Active Response
-Laboratory
-Kali Linux
-Virtual Machines
-Controlled Security Testing Environment
-Key Skills Demonstrated
-SOC Operations
-SIEM Deployment
-Security Monitoring
-Alert Investigation
-Log Analysis
-Threat Detection
-Threat Hunting
-Cyber Threat Intelligence
-XDR Detection & Response
-SOAR Automation
-Incident Investigation
-Security Event Analysis
-Detection Rule Configuration
-Automated Response
-Security Documentation
-My Contribution
+**Threat Intelligence**
 
-As part of the project team, I contributed to the technical implementation and documentation of the SOC environment.
+*   VirusTotal
+    
+*   AbuseIPDB
+    
+*   AlienVault OTX
+    
+*   Cyber Threat Intelligence
+    
+*   Indicators of Compromise
+    
 
-My main contributions included:
+**Automation**
 
-XDR Detection & Automated Response
-Configured and validated XDR detection scenarios.
-Worked with Wazuh detection rules.
-Investigated security events and alerts.
-Configured response actions.
-Validated detection and response results.
-Documented technical evidence and findings.
-Shuffle SOAR Automation
-Integrated Wazuh alerts with Shuffle.
-Configured the webhook-based alert workflow.
-Designed the automated notification process.
-Tested the workflow using an SSH brute-force detection scenario.
-Verified successful alert processing and email notification.
+*   Shuffle SOAR
+    
+*   Webhooks
+    
+*   Automated Email Notifications
+    
+*   Wazuh Active Response
+    
 
-According to the project peer-review table, my assigned workload covered XDR detection/response and Shuffle SOAR automation, with the assigned work completed.
+**Laboratory**
 
-Project Results
+*   Kali Linux
+    
+*   Virtual Machines
+    
+*   Controlled Security Testing Environment
+    
 
-The project successfully demonstrated a functional SOC environment centered around Wazuh.
+👨‍💻 My Contribution
+---------------------
 
-The final implementation included:
+As a member of the project team, my primary contribution focused on:
 
-Centralized SIEM monitoring
-Windows and Linux security monitoring
-Snort IDS integration
-XDR detection and automated response
-Threat intelligence enrichment
-VirusTotal, AbuseIPDB, and AlienVault OTX integration
-Shuffle SOAR automation
-Automated security notifications
-Security event investigation and validation
+### XDR Detection & Automated Response
 
-The overall project demonstrated how open-source security technologies can be combined to create a layered SOC monitoring and response environment.
+*   Configured and validated XDR detection scenarios
+    
+*   Worked with Wazuh detection rules
+    
+*   Investigated security events and alerts
+    
+*   Configured response actions
+    
+*   Validated detection and response results
+    
+*   Documented technical evidence and findings
+    
 
-Project Documentation
+### Shuffle SOAR Automation
 
-The complete project report and supporting evidence are available in this repository.
+*   Integrated Wazuh alerts with Shuffle
+    
+*   Configured the webhook-based workflow
+    
+*   Designed the automated notification process
+    
+*   Tested SSH brute-force detection
+    
+*   Verified alert processing and email notification
+    
 
-The documentation contains:
+My assigned project workload covered **XDR Detection & Automated Response and Shuffle SOAR Automation**.
 
-SOC architecture
-Threat intelligence analysis
-Wazuh deployment
-XDR detection and response
-SOAR automation
-Threat intelligence integration
-Detection evidence
-Response validation
-Project results
-Project Structure
+📈 Project Results
+------------------
+
+The project successfully demonstrated a functional SOC environment centered around Wazuh, including:
+
+*   Centralized SIEM monitoring
+    
+*   Windows and Linux security monitoring
+    
+*   Snort IDS integration
+    
+*   XDR detection and automated response
+    
+*   Threat intelligence enrichment
+    
+*   VirusTotal, AbuseIPDB, and AlienVault OTX integration
+    
+*   Shuffle SOAR automation
+    
+*   Automated security notifications
+    
+*   Security event investigation and validation
+    
+
+📁 Project Structure
+--------------------
+
+```
 SOC-Wazuh-SIEM/
 │
 ├── README.md
 │
 ├── Documentation/
-│   └── SOC-Project-Report.pdf
+│
+└── SOC-Project-Report.pdf
 │
 ├── Evidence/
-│   ├── Wazuh/
-│   ├── Shuffle/
-│   ├── Threat-Intelligence/
-│   └── Detection-Response/
+│      ├── Wazuh/
+│      ├── Shuffle/
+│      ├── Threat-Intelligence/
+│      └── Detection-Response/
 │
 └── Screenshots/
-    ├── Wazuh-Dashboard/
-    ├── Shuffle-Workflow/
-    └── Security-Alerts/
-Learning Outcomes
+      ├── Wazuh-Dashboard/
+      ├── Shuffle-Workflow/
+      └── Security-Alerts/   `
+```
+🎓 Learning Outcomes
+--------------------
 
 Through this project, I gained practical experience in:
 
-Building a SOC monitoring environment
-Deploying and configuring a SIEM
-Investigating security alerts
-Working with Windows and Linux security logs
-Creating and validating detection rules
-Applying threat intelligence to security investigations
-Implementing automated security responses
-Integrating SIEM with SOAR
-Documenting security incidents and technical evidence
-Author
+*   Building a SOC monitoring environment
+    
+*   Deploying and configuring a SIEM
+    
+*   Investigating security alerts
+    
+*   Analyzing Windows and Linux security logs
+    
+*   Creating and validating detection rules
+    
+*   Applying threat intelligence to investigations
+    
+*   Implementing automated security responses
+    
+*   Integrating SIEM with SOAR
+    
+*   Documenting security incidents and technical evidence
+    
 
-Abdulrahman Altairey
+👤 Author
+---------
 
-Cybersecurity Student
-Bahrain Polytechnic
-And importantly, your personal contribution is clearly separated from the group's work, which is useful because the original report shows that your assigned work was specifically **XDR Detection & Automated Response + Shuffle SOAR**. :contentReference[oaicite:7]{index=7}
+**Abdulrahman Altairey**Cybersecurity Student**Bahrain Polytechnic**
 
-Also, I deliberately l
+> This project was conducted in a **controlled virtual laboratory environment** for educational and cybersecurity learning purposes.
