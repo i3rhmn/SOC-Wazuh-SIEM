@@ -316,25 +316,12 @@ The project successfully demonstrated a functional SOC environment centered arou
 📁 Project Structure
 --------------------
 
-```
+```text
 SOC-Wazuh-SIEM/
 │
 ├── README.md
 │
-├── Documentation/
-│
-└── SOC-Project-Report.pdf
-│
-├── Evidence/
-│      ├── Wazuh/
-│      ├── Shuffle/
-│      ├── Threat-Intelligence/
-│      └── Detection-Response/
-│
-└── Screenshots/
-      ├── Wazuh-Dashboard/
-      ├── Shuffle-Workflow/
-      └── Security-Alerts/   `
+└── SOC Project Report.docx
 ```
 🎓 Learning Outcomes
 --------------------
